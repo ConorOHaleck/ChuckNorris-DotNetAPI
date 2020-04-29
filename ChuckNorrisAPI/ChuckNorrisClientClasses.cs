@@ -19,7 +19,6 @@ namespace ChuckNorrisAPI
             client.BaseAddress = new Uri("http://api.icndb.com");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.Timeout = TimeSpan.FromSeconds(20);
         }
 
         public async static Task<Joke> GetRandomJoke()
@@ -106,13 +105,10 @@ namespace ChuckNorrisAPI
             if (response.IsSuccessStatusCode)
             {
                 var data = JsonConvert.DeserializeObject<CategoriesResponse>(await response.Content.ReadAsStringAsync());
-                Console.WriteLine("NOT NULL AAAAAAAAAAAAAAHH");
-                Console.WriteLine(data.ToString());
                 return data.Categories;
             }
             else
             {
-                Console.WriteLine("NULL AAAAAAAAAAAAAHHH");
                 return null;
             }
         }
